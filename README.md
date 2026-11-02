@@ -30,6 +30,21 @@ The full RSI-Dojo release is organized around:
 - Dataset and paper provenance for the environments.
 - Utilities for running, validating, and reproducing the environments.
 
+## Results Snapshot
+
+![RSI-Dojo result summary](assets/results.svg)
+
+| Model | Benchmark | Base | RSI-Dojo | Gain |
+|---|---:|---:|---:|---:|
+| RSI-Dojo-9B | PostTrainBench | 7.72 | 16.46 | +8.74 |
+| RSI-Dojo-35B-A3B | PostTrainBench | 13.08 | 29.95 | +16.87 |
+| RSI-Dojo-9B | PostTrainBench-Lite | 0.56 | 15.71 | +15.15 |
+| RSI-Dojo-35B-A3B | PostTrainBench-Lite | 5.80 | 53.29 | +47.49 |
+
+RSI-Dojo-35B-A3B completed all 28 PostTrainBench settings and improved the
+trained model in 26 of them. Across 175 total iterations, 61 iterations produced
+effective improvements.
+
 ## Release Progress
 
 - [ ] Environments
