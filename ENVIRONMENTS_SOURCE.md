@@ -1,4 +1,4 @@
-# RSI-Dojo Environments
+# RSI-Dojo Environment Sources
 
 This document lists the benchmark provenance and runtime requirements for the
 released RSI-Dojo environments. The source table is generated from the
@@ -21,7 +21,7 @@ then installs the per-job Python environment used by the agent. In the `run1.sh`
 execution path, dependency installation happens in `src/run_task.sh` through:
 
 ```bash
-python -m pip install --user -r requirements1.txt
+python -m pip install --user -r requirements.txt
 ```
 
 Some environments use an LLM judge during evaluation. Before launching those

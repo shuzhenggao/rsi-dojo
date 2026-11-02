@@ -39,8 +39,8 @@ The full RSI-Dojo release is organized around:
 - Dataset and paper provenance for the environments.
 - Utilities for running, validating, and reproducing the environments.
 
-The released environment list is available in
-[ENVIRONMENTS.md](ENVIRONMENTS.md). It groups the 281 normalized environments
+The released environment source list is available in
+[ENVIRONMENTS_SOURCE.md](ENVIRONMENTS_SOURCE.md). It groups the 281 normalized environments
 by domain, records each environment's originating paper, public dataset, or
 InspectAI task source, and summarizes the runtime dependencies used by
 `run1.sh`. Some environments use an LLM judge and require
