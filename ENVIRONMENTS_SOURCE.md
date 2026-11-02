@@ -2,7 +2,7 @@
 
 This document lists the benchmark provenance and runtime requirements for the
 released RSI-Dojo environments. The source table is generated from the
-normalized task metadata under `src/eval/tasks/open-rsi` in the release
+normalized task metadata under `src/eval/tasks/rsi-dojo` in the release
 workspace.
 
 Each row corresponds to one executable environment. `Source type` indicates whether the environment was derived from an InspectAI task or from a paper / public dataset source. `Source` records the normalized source description used by the environment metadata.

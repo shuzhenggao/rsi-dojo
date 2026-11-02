@@ -1,4 +1,4 @@
-# Core versions aligned with the open-rsi environment.
+# Core versions aligned with the rsi-dojo environment.
 datasets==4.5.0
 transformers==4.57.3
 huggingface-hub==0.36.0
@@ -8,7 +8,7 @@ inspect-ai==0.3.179
 # Benchmark dependencies used by the released environment set.
 inspect-evals[fortress,math,medqa,personality,sciknoweval,worldsense]==0.3.106
 
-# IFEval-style tasks use the local open-rsi implementation, so this optional
+# IFEval-style tasks use the local rsi-dojo implementation, so this optional
 # GitHub dependency is not installed by default.
 # instruction-following-eval @ git+https://github.com/josejg/instruction_following_eval@main
 
@@ -26,7 +26,7 @@ pint
 timeout-decorator
 torchmetrics
 
-# Remaining open-rsi dependencies.
+# Remaining rsi-dojo dependencies.
 bert-score
 cloudpickle
 evaluate
