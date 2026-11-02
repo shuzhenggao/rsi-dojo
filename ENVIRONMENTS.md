@@ -1,6 +1,9 @@
-# RSI-Dojo Data Sources
+# RSI-Dojo Environments
 
-This document lists the data and benchmark sources used by the RSI-Dojo environments. It is generated from the normalized task metadata under `src/eval/tasks/open-rsi` in the release workspace.
+This document lists the benchmark provenance and runtime requirements for the
+released RSI-Dojo environments. The source table is generated from the
+normalized task metadata under `src/eval/tasks/open-rsi` in the release
+workspace.
 
 Each row corresponds to one executable environment. `Source type` indicates whether the environment was derived from an InspectAI task or from a paper / public dataset source. `Source` records the normalized source description used by the environment metadata.
 
@@ -10,6 +13,43 @@ Total environments: **281**
 |---|---:|
 | Paper / dataset | 212 |
 | InspectAI | 69 |
+
+## Runtime Environment
+
+The local runner loads `local_env.sh`, prepares an isolated job directory, and
+then installs the per-job Python environment used by the agent. In the `run1.sh`
+execution path, dependency installation happens in `src/run_task.sh` through:
+
+```bash
+python -m pip install --user -r requirements1.txt
+```
+
+Core runtime packages:
+
+| Package | Version / constraint |
+|---|---|
+| `datasets` | `==4.5.0` |
+| `transformers` | `==4.57.3` |
+| `huggingface-hub` | `==0.36.0` |
+| `httpx` | `>=0.27,<1` |
+| `inspect-ai` | `==0.3.179` |
+| `inspect-evals` | `==0.3.106` with `fortress`, `math`, `medqa`, `personality`, `sciknoweval`, and `worldsense` extras |
+| `torch` | `==2.8.0` |
+| `vllm` | `==0.11.0` |
+
+Additional benchmark dependencies installed by the runner:
+
+`accelerate`, `bert-score`, `cloudpickle`, `evaluate`, `fcd`, `jieba`,
+`jinja2`, `jsonlines`, `jq`, `langchain-core`, `langdetect`,
+`latex2sympy2-extended`, `math-verify==0.1.0`, `networkx`, `nltk`, `numpy`,
+`openai`, `openpyxl`, `pandas`, `pebble`, `pint`, `protobuf`, `psutil`,
+`pyarrow`, `pypinyin`, `python-dateutil`, `python-Levenshtein`, `PyYAML`,
+`rdkit`, `requests`, `rouge`, `rouge-score`, `sacrebleu`, `scikit-learn`,
+`scipy`, `sentence-transformers`, `sentencepiece`, `sympy`,
+`timeout-decorator`, `torchmetrics`, `tqdm`, `unified-planning`, and `xlrd`.
+
+The runner uses a local implementation for IFEval-style tasks, so the optional
+`instruction-following-eval` GitHub dependency is not installed by default.
 
 ## Sources by Domain
 
