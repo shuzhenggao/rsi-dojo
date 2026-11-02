@@ -23,6 +23,8 @@ configure post-training, run evaluations, and decide how to continue. This makes
 the environment suitable for collecting and evaluating full model-improvement
 trajectories rather than isolated final answers.
 
+![RSI-Craft pipeline overview](assets/method.png)
+
 The full RSI-Dojo release is organized around:
 
 - Executable post-training environments.
@@ -32,7 +34,7 @@ The full RSI-Dojo release is organized around:
 
 ## Results Snapshot
 
-![RSI-Dojo result summary](assets/results.svg)
+![RSI-Dojo result summary](assets/results.png)
 
 | Model | Benchmark | Base | RSI-Dojo | Gain |
 |---|---:|---:|---:|---:|
