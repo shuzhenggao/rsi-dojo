@@ -12,13 +12,18 @@ whether an agent can solve a static task, RSI-Dojo focuses on whether an agent
 can run the model-development loop itself: data selection, training, validation,
 and revision.
 
-This repository will provide:
+This repository contains:
 
 - The executable post-training environments used by RSI-Dojo.
 - The normalized benchmark interfaces and evaluation entry points.
 - The list of datasets and papers used to construct the environments.
 - Utilities for running, validating, and reproducing the environments.
 
-The environment and dataset materials are being organized for release. More
-files and documentation will be added as the release is finalized.
+Release progress:
 
+- [ ] Environments
+- [ ] Data
+- [ ] Models and code
+
+The materials are being organized for staged release. Items will be checked off
+as they become available.
