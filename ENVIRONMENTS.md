@@ -24,6 +24,14 @@ execution path, dependency installation happens in `src/run_task.sh` through:
 python -m pip install --user -r requirements1.txt
 ```
 
+Some environments use an LLM judge during evaluation. Before launching those
+runs, configure the judge endpoint in the shell:
+
+```bash
+export EVAL_OPENAI_AK=...
+export EVAL_OPENAI_ENDPOINT=...
+```
+
 Core runtime packages:
 
 | Package | Version / constraint |

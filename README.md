@@ -43,7 +43,8 @@ The released environment list is available in
 [ENVIRONMENTS.md](ENVIRONMENTS.md). It groups the 281 normalized environments
 by domain, records each environment's originating paper, public dataset, or
 InspectAI task source, and summarizes the runtime dependencies used by
-`run1.sh`.
+`run1.sh`. Some environments use an LLM judge and require
+`EVAL_OPENAI_AK` and `EVAL_OPENAI_ENDPOINT` to be configured before running.
 
 ## Results Snapshot
 
