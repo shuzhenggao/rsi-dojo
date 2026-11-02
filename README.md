@@ -25,6 +25,13 @@ trajectories rather than isolated final answers.
 
 ![RSI-Craft pipeline overview](assets/method.png)
 
+RSI-Craft builds the environment collection in three stages. It first searches
+recent top-venue papers and InspectAI tasks for candidate benchmarks, then
+instantiates executable environments by recovering data, metrics, dependencies,
+and evaluation code. Finally, it filters the environments for reliability and
+discriminability so that retained tasks provide useful feedback for iterative
+post-training.
+
 The full RSI-Dojo release is organized around:
 
 - Executable post-training environments.
@@ -34,16 +41,14 @@ The full RSI-Dojo release is organized around:
 
 ## Results Snapshot
 
+![PostTrainBench performance comparison](assets/performance.png)
+
 ![RSI-Dojo result summary](assets/results.png)
 
-| Model | Benchmark | Base | RSI-Dojo | Gain |
-|---|---:|---:|---:|---:|
-| RSI-Dojo-9B | PostTrainBench | 7.72 | 16.46 | +8.74 |
-| RSI-Dojo-35B-A3B | PostTrainBench | 13.08 | 29.95 | +16.87 |
-| RSI-Dojo-9B | PostTrainBench-Lite | 0.56 | 15.71 | +15.15 |
-| RSI-Dojo-35B-A3B | PostTrainBench-Lite | 5.80 | 53.29 | +47.49 |
-
-RSI-Dojo-35B-A3B completed all 28 PostTrainBench settings and improved the
+Fine-tuning on RSI-Dojo trajectories improves both evaluated model families on
+PostTrainBench and PostTrainBench-Lite. RSI-Dojo-35B-A3B reaches 29.95 on
+PostTrainBench and 53.29 on PostTrainBench-Lite under the reported evaluation
+setting. It also completed all 28 PostTrainBench settings and improved the
 trained model in 26 of them. Across 175 total iterations, 61 iterations produced
 effective improvements.
 
