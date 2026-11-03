@@ -51,7 +51,8 @@ The packaged environment archive is hosted on
 
 ## Generating Rollout Trajectories
 
-RSI-Dojo environments are designed to be used with the AutoTrainess benchmark
+RSI-Dojo environments are designed to be used with the
+[AutoTrainess](https://github.com/simple-agent-lab/AutoTrainess) benchmark
 runner. The RSI-Dojo archive supplies the evaluation task folders; AutoTrainess
 supplies the runner, agent interface, training skills, evaluation loop, and
 artifact collection. One AutoTrainess evaluation run on one RSI-Dojo task
