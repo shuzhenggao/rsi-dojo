@@ -46,6 +46,64 @@ InspectAI task source, and summarizes the runtime dependencies used by
 `run1.sh`. Some environments use an LLM judge and require
 `EVAL_OPENAI_AK` and `EVAL_OPENAI_ENDPOINT` to be configured before running.
 
+The packaged environment archive is hosted on
+[Figshare](https://figshare.com/s/8f82a1c7669ee44c1a4a).
+
+## Rolling Out Data with AutoTrainess
+
+RSI-Dojo environments can be used as AutoTrainess-style post-training tasks.
+Each rollout asks an agent to improve a base model through the same closed-loop
+workflow used by AutoTrainess: plan an iteration, build or select training
+data, train, evaluate, diagnose failures, and log the result.
+
+1. Download and unpack the environment archive.
+
+```bash
+mkdir -p src/eval/tasks
+tar -xJf rsi-dojo-environments.tar.xz -C src/eval/tasks
+```
+
+The archive extracts to `src/eval/tasks/rsi-dojo/`. Task slugs are listed in
+[ENVIRONMENTS_SOURCE.md](ENVIRONMENTS_SOURCE.md).
+
+2. Install the runtime dependencies.
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+3. Configure LLM judge access for environments that need judge-based scoring.
+
+```bash
+export EVAL_OPENAI_AK=...
+export EVAL_OPENAI_ENDPOINT=...
+```
+
+4. Add the AutoTrainess agent interface to the rollout workspace.
+
+Use the AutoTrainess `AGENTS.md` and `autotrainhub` skills as the agent-facing
+interface. The expected iteration pattern is:
+
+```text
+iteration_plan -> data -> train -> eval -> log
+```
+
+5. Launch a rollout on one RSI-Dojo environment.
+
+```bash
+bash run1.sh \
+  --task rsi-dojo/<task_slug> \
+  --agent local_codex \
+  --model Qwen/Qwen3-1.7B-Base \
+  --hours 10 \
+  --output-dir results/rsi_dojo/<task_slug>/<run_id>
+```
+
+The rollout directory contains the agent trace, generated training data,
+training logs, final model artifact, evaluation outputs, and iteration records.
+These rollout trajectories are the data release target; they are separate from
+the environment archive and are not included in the current release.
+
 ## Results Snapshot
 
 ![PostTrainBench performance comparison](assets/performance.png)

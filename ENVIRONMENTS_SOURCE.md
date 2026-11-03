@@ -14,6 +14,28 @@ Total environments: **281**
 | Paper / dataset | 212 |
 | InspectAI | 69 |
 
+## Environment Archive
+
+The packaged RSI-Dojo environment archive is hosted on Figshare:
+
+https://figshare.com/s/8f82a1c7669ee44c1a4a
+
+Archive details:
+
+| Field | Value |
+|---|---|
+| File | `rsi-dojo-environments.tar.xz` |
+| Compressed size | `518M` |
+| Extracted top-level directory | `rsi-dojo/` |
+| SHA256 | `625f3f6059c25c7af8b5eb8828d1972edac9139f90686cb49885492d5882bc92` |
+
+To unpack the environments into a runner workspace:
+
+```bash
+mkdir -p src/eval/tasks
+tar -xJf rsi-dojo-environments.tar.xz -C src/eval/tasks
+```
+
 ## Runtime Environment
 
 The local runner loads `local_env.sh`, prepares an isolated job directory, and
