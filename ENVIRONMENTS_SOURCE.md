@@ -29,21 +29,20 @@ Archive details:
 | Extracted top-level directory | `rsi-dojo/` |
 | SHA256 | `625f3f6059c25c7af8b5eb8828d1972edac9139f90686cb49885492d5882bc92` |
 
-To unpack the environments into a runner workspace:
+To add the environments to an AutoTrainess runner workspace:
 
 ```bash
-mkdir -p src/eval/tasks
-tar -xJf rsi-dojo-environments.tar.xz -C src/eval/tasks
+tar -xJf rsi-dojo-environments.tar.xz
+rsync -a rsi-dojo/ src/eval/tasks/
 ```
 
 ## Runtime Environment
 
-The local runner loads `local_env.sh`, prepares an isolated job directory, and
-then installs the per-job Python environment used by the agent. In the `run1.sh`
-execution path, dependency installation happens in `src/run_task.sh` through:
+Install the RSI-Dojo runtime dependencies in the AutoTrainess Python
+environment before launching rollouts:
 
 ```bash
-python -m pip install --user -r requirements.txt
+python -m pip install -r requirements.txt
 ```
 
 Some environments use an LLM judge during evaluation. Before launching those

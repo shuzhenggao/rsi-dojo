@@ -43,66 +43,76 @@ The released environment source list is available in
 [ENVIRONMENTS_SOURCE.md](ENVIRONMENTS_SOURCE.md). It groups the 281 normalized environments
 by domain, records each environment's originating paper, public dataset, or
 InspectAI task source, and summarizes the runtime dependencies used by
-`run1.sh`. Some environments use an LLM judge and require
+the AutoTrainess runner. Some environments use an LLM judge and require
 `EVAL_OPENAI_AK` and `EVAL_OPENAI_ENDPOINT` to be configured before running.
 
 The packaged environment archive is hosted on
 [Figshare](https://figshare.com/s/8f82a1c7669ee44c1a4a).
 
-## Rolling Out Data with AutoTrainess
+## Generating Rollout Trajectories
 
-RSI-Dojo environments can be used as AutoTrainess-style post-training tasks.
-Each rollout asks an agent to improve a base model through the same closed-loop
-workflow used by AutoTrainess: plan an iteration, build or select training
-data, train, evaluate, diagnose failures, and log the result.
+RSI-Dojo environments are designed to be used with the AutoTrainess benchmark
+runner. The RSI-Dojo archive supplies the evaluation task folders; AutoTrainess
+supplies the runner, agent interface, training skills, evaluation loop, and
+artifact collection. One AutoTrainess evaluation run on one RSI-Dojo task
+corresponds to one rollout trajectory. No RSI-Dojo-specific local runner needs
+to be copied into AutoTrainess.
 
-1. Download and unpack the environment archive.
+1. Check out AutoTrainess with its full runner.
 
 ```bash
-mkdir -p src/eval/tasks
-tar -xJf rsi-dojo-environments.tar.xz -C src/eval/tasks
+git clone https://github.com/simple-agent-lab/AutoTrainess.git
+cd AutoTrainess
+git checkout full-code
 ```
 
-The archive extracts to `src/eval/tasks/rsi-dojo/`. Task slugs are listed in
+2. Download the RSI-Dojo environment archive from
+[Figshare](https://figshare.com/s/8f82a1c7669ee44c1a4a), unpack it, and add the
+task folders to AutoTrainess.
+
+```bash
+tar -xJf rsi-dojo-environments.tar.xz
+rsync -a rsi-dojo/ src/eval/tasks/
+```
+
+After this step, each RSI-Dojo task is available as
+`src/eval/tasks/<task_slug>/` inside AutoTrainess. Task slugs are listed in
 [ENVIRONMENTS_SOURCE.md](ENVIRONMENTS_SOURCE.md).
 
-2. Install the runtime dependencies.
+3. Prepare AutoTrainess following its README, then install the RSI-Dojo runtime
+dependencies into the same Python environment.
 
 ```bash
-python -m pip install -r requirements.txt
+python -m pip install -r /path/to/rsi-dojo/requirements.txt
 ```
 
-3. Configure LLM judge access for environments that need judge-based scoring.
+4. Configure LLM judge access for environments that need judge-based scoring.
 
 ```bash
 export EVAL_OPENAI_AK=...
 export EVAL_OPENAI_ENDPOINT=...
 ```
 
-4. Add the AutoTrainess agent interface to the rollout workspace.
-
-Use the AutoTrainess `AGENTS.md` and `autotrainhub` skills as the agent-facing
-interface. The expected iteration pattern is:
-
-```text
-iteration_plan -> data -> train -> eval -> log
-```
-
-5. Launch a rollout on one RSI-Dojo environment.
+5. Select an RSI-Dojo task in AutoTrainess and run the standard AutoTrainess
+pipeline.
 
 ```bash
-bash run1.sh \
-  --task rsi-dojo/<task_slug> \
-  --agent local_codex \
-  --model Qwen/Qwen3-1.7B-Base \
-  --hours 10 \
-  --output-dir results/rsi_dojo/<task_slug>/<run_id>
+# In AutoTrainess/run.sh:
+#   INSPECT_EVALS="<task_slug>"
+#   AGENT="local_codex"
+#   MODEL_TO_TRAIN="Qwen/Qwen3-1.7B-Base"
+#   NUM_HOURS="10"
+
+bash run.sh
 ```
 
-The rollout directory contains the agent trace, generated training data,
-training logs, final model artifact, evaluation outputs, and iteration records.
-These rollout trajectories are the data release target; they are separate from
-the environment archive and are not included in the current release.
+AutoTrainess copies the selected `src/eval/tasks/<task_slug>/` folder into an
+isolated task workspace, launches the agent, runs training and evaluation, and
+archives the resulting artifacts under `results/`. The rollout directory
+contains the agent trace, generated training data, training logs, final model
+artifact, evaluation outputs, and iteration records. These rollout trajectories
+are the data release target; they are separate from the environment archive and
+are not included in the current release.
 
 ## Results Snapshot
 
