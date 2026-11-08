@@ -71,6 +71,8 @@ git checkout full-code
 [Figshare](https://figshare.com/s/8f82a1c7669ee44c1a4a), unpack it, and add the
 task folders to AutoTrainess.
 
+> **Note**: Current environments follow the same raw format as PostTrainBench. We are unifying them to the Harbor format for future use.
+
 ```bash
 tar -xJf rsi-dojo-environments.tar.xz
 rsync -a rsi-dojo/ src/eval/tasks/
@@ -131,8 +133,9 @@ effective improvements.
 ## Release Progress
 
 - [x] Environments
-- [ ] Data
-- [ ] Models and code
+- [ ] Converting the environments into Harbor format
+- [ ] Training data
+- [ ] Models
 
 The materials are being organized for staged release. Items will be checked off
 as they become available.
