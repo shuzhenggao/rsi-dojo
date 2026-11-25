@@ -442,7 +442,3 @@ We removed seven environments with potential evaluation-data overlap and one add
 | MixEval | `mixeval_deriving_wisdom_of_the_crowd_from_llm_benchmark_mixtures` | Frozen examples overlap GSM8K test and GPQA Main. |
 | STREET | `street` | The 100 GSM8K rows in the frozen mixed task match GSM8K test. |
 | SIRBench | `sirbench` | Precautionary exclusion: a bundled OpenCompass MGSM README exposes a GSM8K test example; the primary DNA samples did not match. |
-
-These source environments are excluded from the revised full, behavior-only, and improve-only training-data builds. The hosted historical archive has not been replaced and still contains them: skip these exact IDs when collecting new training trajectories from that archive. Older data, checkpoints, and reported results are not retrospectively changed by this selection.
-
-The audit used local PostTrainBench reference snapshots; it was not exhaustive semantic/paraphrase detection, and BFCL did not receive item-level comparison. Retention does not certify zero contamination. Direct exposure of the bundled SIRBench example in a training trajectory was not established.
